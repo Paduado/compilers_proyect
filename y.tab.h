@@ -56,7 +56,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 9 "compilers.y"
+#line 10 "compilers.y"
 {float num;}
 /* Line 1529 of yacc.c.  */
 #line 63 "y.tab.h"

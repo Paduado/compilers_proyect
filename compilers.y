@@ -1,5 +1,6 @@
 %{
 void yyerror (char *s);
+int yylex(void);
 #include <stdio.h>
 #include <stdlib.h>
 float exponentiate(float n, float e);
@@ -12,38 +13,43 @@ float X;
 %token salir
 %token  x
 %token <num> number
-%type <num> S exp   a b val
+%type <num> S exp   a b c val 
 
 
 %%
 
 
-S 	: 	salir ';'{exit(1);}	
-		| void '=' exp ';' {printf("Para x = %f, res = %f\n",X,$3);}
-		| S void '=' exp ';' {printf("Para x = %f, res = %f\n",X,$4);}
-		| S salir ';' {;}
+S 	: 	salir ';'			{exit(1);}	
+		| exp ';' 			{printf("%f\n",$1);}
+		| S exp ';'			{printf("%f\n",$2);}
+		| void '=' exp ';' 	{printf("Para x = %f, res = %f\n",X,$3);}
+		| S void '=' exp ';'{printf("Para x = %f, res = %f\n",X,$4);}
+		| S salir ';' 		{;}
 		;
 
-void : start '(' number ')' {X = $3;};
+void: 	start '(' number ')' {X = $3;};
 
 
-exp : 	a {$$ = $1;}
-		| exp '+' a {$$ = $1 + $3;}
-		| exp '-' a {$$ = $1 - $3;}
+exp : 	a 					{$$ = $1;}
+		| exp '+' a 		{$$ = $1 + $3;}
+		| exp '-' a 		{$$ = $1 - $3;}
 		;
 
-a : 	b {$$ = $1;}
-		| a '*' b {$$ = $1 * $3;}
-		| a '/' b {$$ = $1 / $3;}
+a 	: 	b 					{$$ = $1;}
+		| a '*' b 			{$$ = $1 * $3;}
+		| a '/' b {			$$ = $1 / $3;}
 		;
 
-b : 	val {$$ = $1;}
-		| b '^' val {$$ = exponentiate($1,$3);}
+b 	: 	c 					{$$ = $1;}
+		|b c				{$$ = $1 * $2;}
+		;
+
+c 	: 	val 				{$$ = $1;}
+		| c '^' val 		{$$ = exponentiate($1,$3);}
 		;
 
 val :	x 					{$$ = X;}
 		|number 			{$$ = $1;}
-		|number val			{$$ = $1 * X;}
 		|'(' exp ')'		{$$ = $2;}
 		;
 
@@ -61,9 +67,7 @@ float exponentiate(float n, float e)
 } 
 
 
-int main (void) {
-	X = 23;
-	
+int main (void) {	
 	return yyparse();
 }
 
