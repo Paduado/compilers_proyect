@@ -644,7 +644,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 4 "compilers.l"
+#line 5 "compilers.l"
 
 
 #line 651 "lex.yy.c"
@@ -732,43 +732,43 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 6 "compilers.l"
+#line 7 "compilers.l"
 {return salir;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 7 "compilers.l"
+#line 8 "compilers.l"
 {return x;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 8 "compilers.l"
+#line 9 "compilers.l"
 {return start;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 9 "compilers.l"
+#line 10 "compilers.l"
 {yylval.num = atof(yytext); return number;}
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 10 "compilers.l"
+#line 11 "compilers.l"
 ;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 11 "compilers.l"
+#line 12 "compilers.l"
 {return yytext[0];}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 12 "compilers.l"
+#line 13 "compilers.l"
 {ECHO; yyerror("Caracter inesperado");}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 14 "compilers.l"
+#line 15 "compilers.l"
 ECHO;
 	YY_BREAK
 #line 775 "lex.yy.c"
@@ -1768,8 +1768,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 14 "compilers.l"
+#line 15 "compilers.l"
 
 
 int yywrap (void) {return 1;}
-

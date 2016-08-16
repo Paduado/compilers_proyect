@@ -1,12 +1,12 @@
 %{
 void yyerror (char *s);
-#include <stdio.h>     /* C declarations used in actions */
+#include <stdio.h>
 #include <stdlib.h>
 float exponentiate(float n, float e);
 float X;
 %}
 
-%union {float num;}         /* Yacc definitions */
+%union {float num;} 
 %start S
 %token start
 %token salir
@@ -18,8 +18,10 @@ float X;
 %%
 
 
-S 	: 	salir	{exit(1);}	
-		| void '=' exp ';'{printf("Para x = %f, res = %f\n",X,$3);}
+S 	: 	salir ';'{exit(1);}	
+		| void '=' exp ';' {printf("Para x = %f, res = %f\n",X,$3);}
+		| S void '=' exp ';' {printf("Para x = %f, res = %f\n",X,$4);}
+		| S salir ';' {;}
 		;
 
 void : start '(' number ')' {X = $3;};
@@ -42,7 +44,7 @@ b : 	val {$$ = $1;}
 val :	x 					{$$ = X;}
 		|number 			{$$ = $1;}
 		|number val			{$$ = $1 * X;}
-		|'(' exp ')'			{$$ = $2;}
+		|'(' exp ')'		{$$ = $2;}
 		;
 
 
