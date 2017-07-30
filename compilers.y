@@ -17,7 +17,6 @@ float X;
 
 %%
 
-
 S 	: 	salir ';'			{exit(1);}	
 		| exp ';' 			{printf("%f\n",$1);}
 		| S exp ';'			{printf("%f\n",$2);}
