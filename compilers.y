@@ -13,8 +13,7 @@ float X;
 %token salir
 %token  x
 %token <num> number
-%type <num> S exp   a b c val 
-
+%type <num> S exp   a b c val
 
 %%
 
